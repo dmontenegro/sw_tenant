@@ -1,0 +1,23 @@
+from django import forms
+from django.core.exceptions import ValidationError
+
+from inventories.models import Inventory
+
+
+class InventoryForm(forms.ModelForm):
+
+    # confirm_email = forms.EmailField(
+    #     label="Confirm email",
+    #     required=True,
+    # )
+
+    class Meta:
+        model = Inventory
+
+    def __init__(self, *args, **kwargs):
+
+        if kwargs.get('instance'):
+            resume = kwargs['instance'].resume
+            #kwargs.setdefault('initial', {})['confirm_email'] = email
+
+        return super(InventoryForm, self).__init__(*args, **kwargs)
